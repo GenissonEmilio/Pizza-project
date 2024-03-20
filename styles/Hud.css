@@ -1,0 +1,16 @@
+.Hud {
+  position: absolute;
+  left: 2px;
+  top: 10px;
+  image-rendering: pixelated;
+}
+
+.Hud .combatant {
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.Hud .combatant_type {
+  display: none;
+}
+

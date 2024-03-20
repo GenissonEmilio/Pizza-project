@@ -1,0 +1,94 @@
+:root {
+  --border-color: #291D4D;
+  --dialog-background: #FFF3B4;
+  
+  --menu-background: #FFE8D2;
+  --menu-border-color: #A48465;
+  --menu-font-color: #3A160D;
+  --menu-selected-background: #7fc2ff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: #333;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  font-family: 'Ribeye', cursive;
+}
+
+.game-container {
+  position: relative;
+  width: 352px;
+  height: 198px;
+  margin: 0 auto;
+  outline: 1px solid #fff;
+  
+  transform: scale(1) translateY(50%);
+}
+
+.game-container canvas {
+  image-rendering: pixelated;
+}
+
+.arrow-button {
+  position: relative;
+  font-size: 24px;
+  width: 60px;
+  height: 60px;
+  margin: 5px;
+  transition: background-color 0.3s ease;
+}
+
+
+/*.arrow-button:active {
+  box-shadow: none;
+  position: relative;
+  top: .2em;
+}*/
+
+
+#buttonUp {
+  bottom: 70px;
+  right: -147px;
+}
+#buttonDown {
+  bottom: -21px;
+  right: -74px;
+}
+#buttonLeft {
+  bottom: 30px;
+  right: 70px;
+}
+#buttonRight {
+  bottom: 30px;
+  right: 7px;
+}
+#buttonInteract {
+  bottom: 30px;
+  right: -400px;
+}
+#Pause {
+  position: relative;
+  text-align: center;
+	display: inline-block;
+	margin:5px;
+  font-weight: bold;
+  padding: 10px 0 10px 10px ;
+  background-color: lightgray;
+  text-shadow: -1px -1px black, 1px 1px white;
+  color: gray;
+  -webkit-border-radius: 7px;
+	-moz-border-radius: 7px;
+	-o-border-radius: 7px;
+	border-radius: 7px;
+  box-shadow: 0 .2em gray; 
+  cursor: pointer;
+  top: 100px;
+  right: -90px;
+  width: 130px;
+  height: 40px;
+}
