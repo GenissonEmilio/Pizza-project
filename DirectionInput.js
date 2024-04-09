@@ -16,6 +16,7 @@ class DirectionInput {
   }
 
   init() {
+    //I'm crazyyyyy
     document.addEventListener('mousedown', e => {
       const dir = this.map[e.target.id]
       if (dir && this.heldDirections.indexOf(dir) === -1) {
