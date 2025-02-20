@@ -37,7 +37,7 @@ class Overworld {
       
       if (!this.map.isPaused) {
         requestAnimationFrame(() => {
-        step();   
+        step();
         })
       }
     }
