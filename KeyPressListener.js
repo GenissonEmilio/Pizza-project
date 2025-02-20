@@ -4,14 +4,15 @@ class KeyPressListener {
     this.keydownFunction = function(event) {
       if (event.target.id === keyCode) {
         if (keySafe) {
-          keySafe = false
-          callBack()
+          keySafe = false;
+          callBack();
         }
       }
     };
     this.keyupFunction = function(event) {
       if (event.target.id === keyCode) {
-        keySafe = true
+        keySafe = true;
+        console.log("debug");
       }
     };
     
@@ -23,5 +24,6 @@ class KeyPressListener {
   unbind() {
     document.removeEventListener('mousedown', this.keydownFunction);
     document.removeEventListener('mouseup', this.keyupFunction);
+    console.log("debug");
   }
 }
