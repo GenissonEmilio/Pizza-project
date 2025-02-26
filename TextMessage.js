@@ -6,7 +6,7 @@ class TextMessage {
   }
   
   createElement() {
-    //cria um elemento
+    //cria um elementoo
     this.element = document.createElement('div')
     this.element.classList.add('TextMessage')
     

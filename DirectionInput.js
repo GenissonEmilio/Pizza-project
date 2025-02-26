@@ -3,10 +3,10 @@ class DirectionInput {
     this.heldDirections = []
 
     this.map = {
-      'buttonUp': 'up',
-      'buttonDown': 'down',
-      'buttonLeft': 'left',
-      'buttonRight': 'right'
+      'ArrowUp': 'up',
+      'ArrowDown': 'down',
+      'ArrowLeft': 'left',
+      'ArrowRight': 'right'
     }
   }
   

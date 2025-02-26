@@ -37,7 +37,7 @@ class Overworld {
       
       if (!this.map.isPaused) {
         requestAnimationFrame(() => {
-        step();   
+        step();
         })
       }
     }
@@ -45,14 +45,14 @@ class Overworld {
  }
  
  bindActionInput() {
-   new KeyPressListener('buttonInteract', () => {
+   new KeyPressListener('Enter', () => {
      //is there a person here to talk to?
      this.map.checkForActionCutscene()
    })
-   new KeyPressListener('Pause', () => {
+   new KeyPressListener('Escape', () => {
      if (!this.map.isCutscenePlaying) {
        this.map.startCutscene([
-         { type: 'pause'},
+         { type: 'Escape'},
        ])
      }
    })
@@ -127,9 +127,9 @@ class Overworld {
   this.startGameLoop();
   
   /*this.map.startCutscene([
-    //{ type:'battle', enemyId: 'beth'},
-    //{ type:'changeMap', map: 'DemoRoom'},
-    //{ type:'textMessage', text: 'This is the very first message'},
+    { type:'battle', enemyId: 'beth'},
+    { type:'changeMap', map: 'DemoRoom'},
+    { type:'textMessage', text: 'This is the very first message'},
     
   ]);*/
   
