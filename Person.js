@@ -2,7 +2,9 @@ class Person extends GameObject {
   constructor(config) {
     super(config);
     this.movingProgressRemaining = 0;
-    this.isStanding = false
+    this.isStanding = false;
+
+    this.intentPosition = null; //[x,y]
 
     this.isPlayerControlled = config.isPlayerControlled || false;
 
@@ -12,18 +14,14 @@ class Person extends GameObject {
       "left": ["x", -1],
       "right": ["x", 1],
     }
+    this.standBehaviorTimeout;
   }
 
   update(state) {
     if (this.movingProgressRemaining > 0) {
       this.updatePosition();
     } else {
-      
-      //More cases for starting to walk will come here
-      //
-      //
-
-      //Case: We're keyboard ready and have an arrow pressed
+      //We're keyboard ready and have an arrow pressed
       if (!state.map.isCutscenePlaying && this.isPlayerControlled && state.arrow) {
         this.startBehavior(state, {
           type: "walk",
@@ -31,54 +29,67 @@ class Person extends GameObject {
         })
       }
       this.updateSprite(state);
-      
     }
   }
 
   startBehavior(state, behavior) {
+
+    if (!this.isMounted) {
+      return
+    }
+
     //Set character direction to whatever behavior has
     this.direction = behavior.direction;
     
     if (behavior.type === "walk") {
-
       //Stop here if space is not free
       if (state.map.isSpaceTaken(this.x, this.y, this.direction)) {
+
         
-        behavior.retry && setTimeout(() => {
-          this.startBehavior(state, behavior)
-        }, 10)
+          behavior.retry && setTimeout(() => {
+            this.startBehavior(state, behavior)
+          }, 10);
+          return;
         
-        return;
       }
 
       //Ready to walk!
-      state.map.moveWall(this.x, this.y, this.direction);
       this.movingProgressRemaining = 16;
+
+      //Add next position
+      const intentPosition = utils.nextPosition(this.x,this.y, this.direction)
+      this.intentPosition = [
+        intentPosition.x,
+        intentPosition.y,
+      ]
+
       this.updateSprite(state);
     }
-    
-    if (behavior.type === 'stand') {
-      this.isStanding = true
-      setTimeout(() => {
-        utils.emitEvent('PersonStandComplete', {
+
+    if (behavior.type === "stand") {
+      this.isStanding = true;
+      this.standBehaviorTimeout = setTimeout(() => {
+        utils.emitEvent("PersonStandComplete", {
           whoId: this.id
         })
-        this.isStanding = false
+        this.isStanding = false;
       }, behavior.time)
     }
-    
+
   }
 
   updatePosition() {
       const [property, change] = this.directionUpdate[this.direction];
       this[property] += change;
       this.movingProgressRemaining -= 1;
-      
+
       if (this.movingProgressRemaining === 0) {
-        utils.emitEvent('PersonWalkingComplete', {
+        this.intentPosition = null;
+        //We finished the walk!
+        utils.emitEvent("PersonWalkingComplete", {
           whoId: this.id
-        });
-        
+        })
+
       }
   }
 

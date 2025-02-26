@@ -1,29 +1,27 @@
 class KeyPressListener {
-  constructor(keyCode, callBack) {
-    let keySafe = true
+  constructor(keyCode, callback) {
+    let keySafe = true;
     this.keydownFunction = function(event) {
-      if (event.target.id === keyCode) {
-        if (keySafe) {
-          keySafe = false;
-          callBack();
-        }
+      if (event.code === keyCode) {
+         if (keySafe) {
+            keySafe = false;
+            callback();
+         }  
       }
-    };
-    this.keyupFunction = function(event) {
-      if (event.target.id === keyCode) {
-        keySafe = true;
-        console.log("debug");
-      }
-    };
-    
-    document.addEventListener('mousedown', this.keydownFunction);
-    document.addEventListener('mouseup', this.keyupFunction);
-    
+   };
+   this.keyupFunction = function(event) {
+      if (event.code === keyCode) {
+         keySafe = true;
+      }         
+   };
+   document.addEventListener("keydown", this.keydownFunction);
+   document.addEventListener("keyup", this.keyupFunction);
   }
-  
-  unbind() {
-    document.removeEventListener('mousedown', this.keydownFunction);
-    document.removeEventListener('mouseup', this.keyupFunction);
-    console.log("debug");
+
+  unbind() { 
+    document.removeEventListener("keydown", this.keydownFunction);
+    document.removeEventListener("keyup", this.keyupFunction);
   }
+
+
 }

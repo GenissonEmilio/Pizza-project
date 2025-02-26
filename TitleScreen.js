@@ -2,38 +2,38 @@ class TitleScreen {
   constructor({ progress }) {
     this.progress = progress;
   }
-  
+
   getOptions(resolve) {
-    const saveFile = this.progress.getSaveFile();
+    const safeFile = this.progress.getSaveFile();
     return [
-      {
-        label: 'Novo Jogo',
-        description: 'Iniciar um novo jogo',
+      { 
+        label: "New Game",
+        description: "Start a new pizza adventure.",
         handler: () => {
           this.close();
           resolve();
         }
       },
-      saveFile ? {
-        label: 'Continuar',
-        description: 'Carregar progresso',
+      safeFile ? {
+        label: "Continue Game",
+        description: "Resume your adventure",
         handler: () => {
           this.close();
-          resolve(saveFile);
+          resolve(safeFile);
         }
       } : null
     ].filter(v => v);
   }
-  
+
   createElement() {
-    this.element = document.createElement('div');
-    this.element.classList.add('TitleScreen');
+    this.element = document.createElement("div");
+    this.element.classList.add("TitleScreen");
     this.element.innerHTML = (`
-      <img class="TitleScreen_logo" src="./images/logo.png" alt="Pizza Lgends" />
+      <img class="TitleScreen_logo" src="/images/logo.png" alt="Pizza Legends" />
     `)
-    
+
   }
-  
+
   close() {
     this.keyboardMenu.end();
     this.element.remove();
@@ -43,9 +43,10 @@ class TitleScreen {
     return new Promise(resolve => {
       this.createElement();
       container.appendChild(this.element);
-      this.keyboardMenu = new keyboardMenu();
+      this.keyboardMenu = new KeyboardMenu();
       this.keyboardMenu.init(this.element);
-      this.keyboardMenu.setOptions(this.getOptions(resolve));
+      this.keyboardMenu.setOptions(this.getOptions(resolve))
     })
   }
+
 }

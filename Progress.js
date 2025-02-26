@@ -1,17 +1,17 @@
 class Progress {
   constructor() {
-    this.mapId = 'DemoRoom';
+    this.mapId = "Kitchen";
     this.startingHeroX = 0;
     this.startingHeroY = 0;
-    this.startingHeroDirection = 'down';
-    this.saveFileKey = 'PizzaLegends_SaveFile1';
+    this.startingHeroDirection = "down";
+    this.saveFileKey = "PizzaLegends_SaveFile1";
   }
-  
+
   save() {
     window.localStorage.setItem(this.saveFileKey, JSON.stringify({
       mapId: this.mapId,
       startingHeroX: this.startingHeroX,
-      startingHeroY: this.startingHeroX,
+      startingHeroY: this.startingHeroY,
       startingHeroDirection: this.startingHeroDirection,
       playerState: {
         pizzas: playerState.pizzas,
@@ -19,10 +19,15 @@ class Progress {
         items: playerState.items,
         storyFlags: playerState.storyFlags
       }
-    }));
+    }))
   }
-  
+
   getSaveFile() {
+
+    if (!window.localStorage) {
+      return null;
+    }
+
     const file = window.localStorage.getItem(this.saveFileKey);
     return file ? JSON.parse(file) : null
   }
@@ -39,5 +44,5 @@ class Progress {
       })
     }
   }
-  
+
 }
